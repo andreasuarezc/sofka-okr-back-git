@@ -95,7 +95,7 @@ public class CalendarService {
         event = service.events().insert(calendarId, finalEvent).setSendNotifications(true).setConferenceDataVersion(1).execute();
         //System.out.printf("Event created: %s\n", event.getHtmlLink());
 
-        return Mono.just(event);
+        return Mono.just(event).onErrorResume(e-> Mono.error(new IllegalArgumentException("recticar la informacion")));
     }
 
     private ConferenceData getConferenceData() {
